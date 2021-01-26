@@ -1,0 +1,75 @@
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+Using the System.Data.SqlClient;
+ 
+namespace Admin Login Form
+{
+    public partial class frmLogin : Form
+    {
+        String cs = @"Data Source=(LocalDB)v11.0;Integrated Security=True;  AttachDbFilename=|DataDirectory|Login.mdf; Connect Timeout=30";
+ 
+        public frmLogin()
+        {
+            InitializeComponent();
+        }
+ 
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            if (txtUserName.Text == "")
+            {
+                MessageBox.Show("Please Username", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtUserName.Focus();
+                return;
+}
+
+            try
+            {
+                SqlConnection myConnection = default(SqlConnection);
+                myConnection = new SqlConnection(cs);
+ 
+                SqlCommand myCommand = default(SqlCommand);
+ 
+                myCommand = new SqlCommand("SELECT Username,CodeFROM Users WHERE Username = @Username ANDPassword = @Password, myConnection);
+ 
+                SqlParameter Username = new SqlParameter("@Username", SqlDbType.VarChar);
+                SqlParameter Password = new SqlParameter("@Password", SqlDbType.VarChar);
+ 
+                UserName.Value = txtUserName.Text;
+                Password.Value = txtPassword.Text;
+ 
+                myCommand.Parameters.Add(UserName);
+                myCommand.Parameters.Add(Password);
+ 
+                myCommand.Connection.Open();
+ 
+                SqlDataReader myReader = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+ if (txtCode.Text == "")
+            {
+                MessageBox.Show("Please enter Password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtPassword.Focus();
+                return;
+            }
+            try
+            {
+                SqlConnection myConnection = default(SqlConnection);
+                myConnection = new SqlConnection(cs);
+ 
+                SqlCommand myCommand = default(SqlCommand);
+}
+catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+ 
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+}}
+}
